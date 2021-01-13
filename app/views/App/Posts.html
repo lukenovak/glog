@@ -1,0 +1,9 @@
+{{template "header.html" .}}
+<div class="container text-center p-3">
+    <h3 class="my-auto">latest posts</h3>
+    {{range $post := .posts}}
+        {{template "postCard.html" $post}}
+    {{end}}
+    <span><a href="/newPost">create a new post</a></span>
+</div>
+{{template "footer.html" .}}

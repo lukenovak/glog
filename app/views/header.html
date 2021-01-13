@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+
+<html style="min-height: 100%">
+  <head>
+    <title>{{.title}}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/public/css/bootstrap-4.5.3.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png">
+    <script src="/public/js/jquery-2.2.4.min.js"></script>
+    <script src="/public/js/bootstrap-3.3.6.min.js"></script>
+    {{range .moreStyles}}
+      <link rel="stylesheet" type="text/css" href="/public/{{.}}">
+    {{end}}
+    {{range .moreScripts}}
+      <script src="/public/{{.}}" type="text/javascript" charset="utf-8"></script>
+    {{end}}
+  </head>
+  <body style="font-family: 'Fira Code', 'Ubuntu', monospace">
+    <header class="bg-primary text-white">
+      <div class="container py-2 row m-auto">
+        <div class="col-12 col-md-4">
+          <h1 class="my-auto d-none d-md-inline">nluken</h1>
+          <h1 class="my-auto d-md-none text-center">nluken</h1>
+        </div>
+        <div class="d-none d-md-block col-md-8 m-auto">
+          <h3 class="my-auto">where thoughts go to die</h3>
+        </div>
+      </div>
+    </header>

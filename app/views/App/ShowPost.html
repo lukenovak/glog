@@ -1,0 +1,17 @@
+{{template "header.html" .}}
+
+    <div class="container my-2">
+        <div id="postTitle" class="mb-4">
+            <h1>{{.post.Title}}</h1>
+            <p>by luke novak</p>
+        </div>
+        <div id="postBody">
+            {{range $paragraph := .post.Body}}
+                <p>{{$paragraph}}</p>
+            {{end}}
+        </div>
+
+        <span><a href="/Posts">go back to the main page</a></span>
+    </div>
+
+{{template "footer.html" .}}

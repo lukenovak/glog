@@ -1,0 +1,9 @@
+test-results/
+tmp/
+routes/
+messages/
+target/
+go.mod
+go.sum
+.idea/
+none

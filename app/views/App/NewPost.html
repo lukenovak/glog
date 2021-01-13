@@ -1,0 +1,20 @@
+{{template "header.html" .}}
+
+    <div class="container">
+        <span class="row text-center">create a new post</span>
+        <form action="" id="createPostForm">
+            <div class="row my-3">
+                <label class="col-2" for="titleField">title</label>
+                <input type="text" id="titleField" name="titleField">
+            </div>
+            <div class="row my-3">
+                <textarea class="m-auto" placeholder="enter the article here" id="bodyField" name="bodyField" rows="4" cols="50"></textarea>
+            </div>
+            <button id="submitButton" class="btn-outline-primary">submit that shit</button>
+        </form>
+    </div>
+    <script src="/public/js/newPost.js" type="text/javascript" charset="utf-8"></script>
+
+    <span><a href="/Posts">go back to the main page</a></span>
+
+{{template "footer.html" .}}
