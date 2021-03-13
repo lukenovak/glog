@@ -1,4 +1,4 @@
-#Glog: a Golang blogging platform
+# Glog: a Golang blogging platform
 I wanted a place to put some personal thoughts, and wasn't satisfied with
 using Medium like a normal person would be, so I decided to write my own.
 The ultimate end goal of this project is to have a portable, easy to run
@@ -7,12 +7,12 @@ I'm currently a *long* way away from that, but ultimately the hope is that
 the entire application can be downloaded and consequently run with a single
 command.
 
-##Running the server
+## Running the server
 
 If you want to run your own instance of glog right now, there's some things
 you'll have to do first:
 
-###Depenencies
+### Depenencies
 You will obviously need to install Go if you don't have it already. 
 
 You will also need revel, a web application framework for golang. You can install it
