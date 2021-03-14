@@ -1,11 +1,11 @@
 package constants
 
-const PostPath = "ShowPost.html"
+import "html/template"
 
 type Post struct {
 	Id int
 	Title string
-	Body []string // array of paragraphs
+	Body template.HTML // array of paragraphs
 }
 
 type IncomingPostJson struct {

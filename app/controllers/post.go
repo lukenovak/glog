@@ -4,9 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/revel/revel"
-	"glog/app/constants"
-	"glog/app/services"
-	"strings"
+	"github.com/lukenovak/glog/app/constants"
+	"github.com/lukenovak/glog/app/services"
 )
 
 func (c App) ShowPost(id int) revel.Result {
@@ -16,10 +15,6 @@ func (c App) ShowPost(id int) revel.Result {
 	if err != nil {
 		c.Log.Error(err.Error())
 		return c.RenderTemplate(ERROR_404)
-	}
-	c.Log.Info(fmt.Sprintf("%d, %s, %s", post.Id, post.Title, post.Body))
-	if len(post.Body) < 2 {
-		post.Body = strings.Split(post.Body[0], "\n")
 	}
 	return c.Render(post)
 }

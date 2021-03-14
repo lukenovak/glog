@@ -3,7 +3,9 @@ package services
 import (
 	"database/sql"
 	"fmt"
-	"glog/app/constants"
+	"github.com/gomarkdown/markdown"
+	"github.com/lukenovak/glog/app/constants"
+	"html/template"
 	"strings"
 )
 
@@ -62,6 +64,6 @@ func scanToPost(rows *sql.Rows) (constants.Post, error) {
 	var post constants.Post
 	var date, author, unseparatedBody string
 	err := rows.Scan(&post.Id, &date, &author, &post.Title, &unseparatedBody)
-	post.Body = strings.Split(unseparatedBody, "\n")
+	post.Body = template.HTML(markdown.ToHTML([]byte(unseparatedBody), nil, nil))
 	return post, err
 }

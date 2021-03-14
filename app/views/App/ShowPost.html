@@ -6,9 +6,7 @@
             <p>by luke novak</p>
         </div>
         <div id="postBody">
-            {{range $paragraph := .post.Body}}
-                <p>{{$paragraph}}</p>
-            {{end}}
+            {{.post.Body}}
         </div>
 
         <span><a href="/Posts">go back to the main page</a></span>
