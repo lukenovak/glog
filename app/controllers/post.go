@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/revel/revel"
-	"github.com/lukenovak/glog/app/constants"
-	"github.com/lukenovak/glog/app/services"
+	"github.com/lukenovak/goblog/app/constants"
+	"github.com/lukenovak/goblog/app/services"
 )
 
 func (c App) ShowPost(id int) revel.Result {

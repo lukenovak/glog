@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/gomarkdown/markdown"
-	"github.com/lukenovak/glog/app/constants"
+	"github.com/lukenovak/goblog/app/constants"
 	"html/template"
 	"strings"
 )

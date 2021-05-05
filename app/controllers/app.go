@@ -3,7 +3,7 @@ package controllers
 import (
 	_ "github.com/lib/pq"
 	"github.com/revel/revel"
-	"github.com/lukenovak/glog/app/services"
+	"github.com/lukenovak/goblog/app/services"
 )
 
 type App struct {
