@@ -2,8 +2,8 @@ package controllers
 
 import (
 	_ "github.com/lib/pq"
-	"github.com/revel/revel"
 	"github.com/lukenovak/glog/app/services"
+	"github.com/revel/revel"
 )
 
 type App struct {
@@ -22,7 +22,7 @@ func (c App) NewPost() revel.Result {
 }
 
 func (c App) Posts() revel.Result {
-	posts, err := services.GetNumPosts(10)
+	posts, err := services.GetNumMostRecentPostsFromDB(10)
 	if err != nil {
 		return c.RenderError(err)
 	}

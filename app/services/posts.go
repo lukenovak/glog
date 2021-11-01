@@ -4,28 +4,20 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/gomarkdown/markdown"
-	"github.com/lukenovak/glog/app/constants"
+	"github.com/lukenovak/glog/app"
+	"github.com/lukenovak/glog/app/models"
 	"html/template"
 	"strings"
 )
 
-const CREATE_POST_QUERY = "INSERT INTO post_data (title, post_date, body_text, post_author) VALUES ($1, NOW(), $2, -1)"
-const GET_ONE_POST_BY_ID_QUERY = "SELECT * FROM post_data WHERE post_id = $1"
+const CREATE_POST_QUERY = "INSERT INTO post (title, post_date, body_text, post_author) VALUES ($1, NOW(), $2, -1)"
+const GET_ONE_POST_BY_ID_QUERY = "SELECT * FROM post WHERE post_id = $1"
 
+// TODO: Move these to the controller file- this is a mess, and there's no need for this number of functions
 
-// gets up to the given number of posts and returns them
-func GetNumPosts(n int) ([]constants.Post, error) {
-	dbConn, err := sql.Open(constants.POSTGRES, constants.PsqlInfo)
-	defer dbConn.Close()
-	if err != nil {
-		return nil, err
-	}
-	return GetNumMostRecentPostsFromDB(n, dbConn)
-}
-
-func CreatePostInDB(post constants.IncomingPostJson, db *sql.DB) (int64, error) {
+func CreatePostInDB(post models.IncomingPostJson) (int64, error) {
 	bodyString := strings.Join(post.Body, "\n")
-	result, err := db.Exec(CREATE_POST_QUERY, post.Title, bodyString)
+	result, err := app.DB.Exec(CREATE_POST_QUERY, post.Title, bodyString)
 	if err != nil {
 		return -1, err
 	}
@@ -33,9 +25,9 @@ func CreatePostInDB(post constants.IncomingPostJson, db *sql.DB) (int64, error) 
 }
 
 // takes an open connection and gets the post from the db connection
-func GetPostFromDB(postId int, db *sql.DB) (constants.Post, error) {
-	var emptyPost constants.Post
-	rows, err := db.Query(GET_ONE_POST_BY_ID_QUERY, postId)
+func GetPostFromDB(postId int) (models.Post, error) {
+	var emptyPost models.Post
+	rows, err := app.DB.Query(GET_ONE_POST_BY_ID_QUERY, postId)
 	if rows.Next() {
 		return scanToPost(rows)
 	}
@@ -44,15 +36,15 @@ func GetPostFromDB(postId int, db *sql.DB) (constants.Post, error) {
 }
 
 // gets the number given of the most recent posts
-func GetNumMostRecentPostsFromDB(n int, db *sql.DB) ([]constants.Post, error) {
-	unpreppedQuery := fmt.Sprintf("SELECT * FROM post_data ORDER BY post_date LIMIT %d", n)
-	rows, err := db.Query(unpreppedQuery)
+func GetNumMostRecentPostsFromDB(n int) ([]models.Post, error) {
+	unpreppedQuery := fmt.Sprintf("SELECT * FROM post ORDER BY post_date LIMIT %d", n)
+	rows, err := app.DB.Query(unpreppedQuery)
 	if err != nil {
 		return nil, err
 	}
-	var postList []constants.Post
+	var postList []models.Post
 	for rows.Next() {
-		var post constants.Post
+		var post models.Post
 		post, err = scanToPost(rows)
 		postList = append(postList, post)
 	}
@@ -60,8 +52,8 @@ func GetNumMostRecentPostsFromDB(n int, db *sql.DB) ([]constants.Post, error) {
 }
 
 // scans a single row to a post
-func scanToPost(rows *sql.Rows) (constants.Post, error) {
-	var post constants.Post
+func scanToPost(rows *sql.Rows) (models.Post, error) {
+	var post models.Post
 	var date, author, unseparatedBody string
 	err := rows.Scan(&post.Id, &date, &author, &post.Title, &unseparatedBody)
 	post.Body = template.HTML(markdown.ToHTML([]byte(unseparatedBody), nil, nil))

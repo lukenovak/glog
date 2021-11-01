@@ -1,6 +1,8 @@
 package app
 
 import (
+	"database/sql"
+	"github.com/lukenovak/glog/app/constants"
 	"github.com/revel/revel"
 )
 
@@ -10,7 +12,20 @@ var (
 
 	// BuildTime revel app build-time (ldflags)
 	BuildTime string
+
+	// DB database connection pool
+	DB *sql.DB
 )
+
+func initDB() {
+	var err error
+	DB, err = sql.Open(constants.POSTGRES, constants.PsqlInfo); if err != nil {
+		// TODO: handle this correctly
+		print("oops")
+		panic(err)
+	}
+	print("DB connection established")
+}
 
 func init() {
 	// Filters is the default set of global filters.
@@ -30,12 +45,7 @@ func init() {
 		revel.ActionInvoker,           // Invoke the action.
 	}
 
-	// Register startup functions with OnAppStart
-	// revel.DevMode and revel.RunMode only work inside of OnAppStart. See Example Startup Script
-	// ( order dependent )
-	// revel.OnAppStart(ExampleStartupScript)
-	// revel.OnAppStart(InitDB)
-	// revel.OnAppStart(FillCache)
+	revel.OnAppStart(initDB)
 }
 
 // HeaderFilter adds common security headers
