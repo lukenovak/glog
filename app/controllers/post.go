@@ -2,9 +2,9 @@ package controllers
 
 import (
 	"fmt"
-	"github.com/lukenovak/glog/app/models"
-	"github.com/lukenovak/glog/app/services"
+	"github.com/lukenovak/goblog/app/models"
 	"github.com/revel/revel"
+	"github.com/lukenovak/goblog/app/services"
 )
 
 func (c App) ShowPost(id int) revel.Result {

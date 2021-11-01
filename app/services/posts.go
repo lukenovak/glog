@@ -4,8 +4,8 @@ import (
 	"database/sql"
 	"fmt"
 	"github.com/gomarkdown/markdown"
-	"github.com/lukenovak/glog/app"
-	"github.com/lukenovak/glog/app/models"
+	"github.com/lukenovak/goblog/app"
+	"github.com/lukenovak/goblog/app/models"
 	"html/template"
 	"strings"
 )

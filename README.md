@@ -1,4 +1,4 @@
-# Glog: a Golang blogging platform
+# Goblog: a Golang blogging platform
 I wanted a place to put some personal thoughts, and wasn't satisfied with
 using Medium like a normal person would be, so I decided to write my own.
 The ultimate end goal of this project is to have a portable, easy to run
@@ -9,7 +9,7 @@ command.
 
 ## Running the server
 
-If you want to run your own instance of glog right now, there's some things
+If you want to run your own instance of goblog right now, there's some things
 you'll have to do first:
 
 ### Depenencies
